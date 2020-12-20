@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 
@@ -50,12 +50,12 @@ namespace Data_V4
         }
         private static void FindRegister()
         {
-            if (File.Exists(@"C:\Users\Mario David\Desktop\ejercicios\Data V3\Save.txt")) 
+            if (File.Exists(@"C:\Users\Mario David\Desktop\ejercicios\Data V4\Save.txt")) 
             {  
                 Console.WriteLine("Pon la cedula del registro que deseas buscar");
                 int lineFound = 0;
                 string cedula = ReadCedula();
-                string[] lines = File.ReadAllLines(@"C:\Users\Mario David\Desktop\ejercicios\Data V3\Save.txt");  
+                string[] lines = File.ReadAllLines(@"C:\Users\Mario David\Desktop\ejercicios\Data V4\Save.txt");  
                 foreach(string line in lines)
                 {  
                     if (line.Contains(cedula))
@@ -96,9 +96,9 @@ namespace Data_V4
         }
         private static void ShowRegisters()
         {
-            if (File.Exists(@"C:\Users\Mario David\Desktop\ejercicios\Data V3\Save.txt")) 
+            if (File.Exists(@"C:\Users\Mario David\Desktop\ejercicios\Data V4\Save.txt")) 
             {  
-                string[] lines = File.ReadAllLines(@"C:\Users\Mario David\Desktop\ejercicios\Data V3\Save.txt");  
+                string[] lines = File.ReadAllLines(@"C:\Users\Mario David\Desktop\ejercicios\Data V4\Save.txt");  
                 foreach(string line in lines)  
                     Console.WriteLine(line);  
             }
@@ -144,7 +144,7 @@ namespace Data_V4
             }while(!pass);
 
             using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(@"C:\Users\Mario David\Desktop\ejercicios\Data V3\Save.txt", true))
+                new System.IO.StreamWriter(@"C:\Users\Mario David\Desktop\ejercicios\Data V4\Save.txt", true))
             {
                 file.WriteLine(register);
             }
@@ -163,7 +163,7 @@ namespace Data_V4
             
             register = cedula + "," + name + "," + lastName + "," + age + "," + save + "," + password;
 
-            using (StreamWriter writer = new StreamWriter(@"C:\Users\Mario David\Desktop\ejercicios\Data V3\Save.txt"))
+            using (StreamWriter writer = new StreamWriter(@"C:\Users\Mario David\Desktop\ejercicios\Data V4\Save.txt"))
             {
                 for (int currentLine = 1; currentLine <= lines.Length; ++currentLine)
                 {
@@ -181,7 +181,7 @@ namespace Data_V4
         }
         private static void DeleteRegister(string[] lines, int line)
         {
-           using (StreamWriter writer = new StreamWriter(@"C:\Users\Mario David\Desktop\ejercicios\Data V3\Save.txt"))
+           using (StreamWriter writer = new StreamWriter(@"C:\Users\Mario David\Desktop\ejercicios\Data V4\Save.txt"))
             {
                 for (int currentLine = 1; currentLine <= lines.Length; ++currentLine)
                 {
@@ -255,8 +255,11 @@ namespace Data_V4
                     key = Console.ReadKey(true);
                     if (key.Key != ConsoleKey.Backspace)
                     {
-                        name += key.KeyChar;
-                        Console.Write(key.KeyChar);
+                        if(key.Key != ConsoleKey.Enter)
+                        {
+                            name += key.KeyChar;
+                            Console.Write(key.KeyChar);
+                        }
                     }
                     else
                     {
@@ -295,10 +298,11 @@ namespace Data_V4
                     key = Console.ReadKey(true);
                     if (key.Key != ConsoleKey.Backspace)
                     {
-
-                        lastName += key.KeyChar;
-                        Console.Write(key.KeyChar);
-                        
+                         if(key.Key != ConsoleKey.Enter)
+                        {
+                            lastName += key.KeyChar;
+                            Console.Write(key.KeyChar);
+                        }
                     }
                     else
                     {
@@ -437,9 +441,11 @@ namespace Data_V4
                     key = Console.ReadKey(true);
                     if (key.Key != ConsoleKey.Backspace)
                     {
-
-                        password += key.KeyChar;
-                        Console.Write("*");
+                        if(key.Key != ConsoleKey.Enter)
+                        {
+                            password += key.KeyChar;
+                            Console.Write("*");
+                        }
                         
                     }
                     else
@@ -466,6 +472,7 @@ namespace Data_V4
                     Console.WriteLine("Tiene que ser tener mas de 6 caracteres.");
                     continue;
                 }
+                Console.WriteLine();
                 Console.WriteLine("Confirme la contraseña:");
                
                 do
@@ -473,9 +480,11 @@ namespace Data_V4
                     key = Console.ReadKey(true);
                     if (key.Key != ConsoleKey.Backspace)
                     {
-
-                        confirmPassword += key.KeyChar;
-                        Console.Write("*");
+                        if(key.Key != ConsoleKey.Enter)
+                        {
+                            confirmPassword += key.KeyChar;
+                            Console.Write("*");
+                        }
                         
                     }
                     else
@@ -502,4 +511,3 @@ namespace Data_V4
         }
     }
 }
-
